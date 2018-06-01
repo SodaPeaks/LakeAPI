@@ -1,7 +1,6 @@
 const { assert } = require('chai');
 const Lake = require('../../lib/models/Lake');
 const { getErrors } = require('./helpers');
-const { Types } = require('mongoose');
 
 describe('Lake unit test', () => {
 
@@ -25,6 +24,13 @@ describe('Lake unit test', () => {
         input._id = lake._id;
         assert.deepEqual(lake.toJSON(), input);
         assert.isUndefined(lake.validateSync());
+    });
+
+    it('if required field is empty throws error', () => {
+        const lake = new Lake({});
+        const errors = getErrors(lake.validateSync(), 11);
+        assert.equal(errors.name.kind, 'required');
+        assert.equal(errors.state.kind, 'required');
     });
 
 });

@@ -75,4 +75,49 @@ describe('Lake API', () => {
             });
     });
 
+    it('gets a lake by id', () => {
+        return request.get(`/lakes/${lake1._id}`)
+            // .set('Authorization', user1.token)
+            .then(({ body }) => {
+                console.log('BODY', body);
+                assert.deepEqual(body.name, lake1.name);
+            });    
+    });
+
+    it('updates a lake', () => {
+        lake2.name = 'LAKE2';
+
+        return request.put(`/lakes/${lake2._id}`)
+            // .set('Authorization', user1.token)
+            .send(lake2)
+            .then(checkOk)
+            .then(({ body }) => {
+                assert.deepEqual(body, lake2);
+                return request.get(`/lakes/${lake2._id}`);
+            })
+            .then(({ body }) => {
+                assert.equal(body.name, lake2.name);
+            });
+
+    });
+
+    it('deletes a song', () => {
+        return request.delete(`/lakes/${lake2._id}`)
+            // .set('Authorization', user1.token)
+            .then(() => {
+                return request.get(`/lakes/${lake2._id}`);
+            })
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
+    it('returns 404 with non-existent id', () => {
+        return request.get(`/lakes/${lake2._id}`)
+            .then(response => {
+                assert.equal(response.status, 404);
+                assert.match(response.body.error, new RegExp(lake2._id));
+            });
+    });
+
 });

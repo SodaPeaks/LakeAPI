@@ -79,7 +79,6 @@ describe('Lake API', () => {
         return request.get(`/lakes/${lake1._id}`)
             // .set('Authorization', user1.token)
             .then(({ body }) => {
-                console.log('BODY', body);
                 assert.deepEqual(body.name, lake1.name);
             });    
     });

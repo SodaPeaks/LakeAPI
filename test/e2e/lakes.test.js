@@ -23,7 +23,11 @@ describe('Lake API', () => {
         surfaceArea: '2,000 square mi',
         maxDepth: '11 ft',
         avgDepth: '7 ft',
-        surfaceElevation: '2,000 mi'
+        surfaceElevation: '2,000 mi',
+        tsi: 'Oliotrophic',
+        avgTemp: '68',
+        notes: '',
+        bestSeason: ''
     };
 
     let lake2 = {
@@ -37,10 +41,14 @@ describe('Lake API', () => {
         surfaceArea: '3,000 square mi',
         maxDepth: '11 ft',
         avgDepth: '7 ft',
-        surfaceElevation: '3,000 mi'
+        surfaceElevation: '3,000 mi',
+        tsi: 'Oliotrophic',
+        avgTemp: '68',
+        notes: '',
+        bestSeason: ''
     };
 
-    it('saves a song', () => {
+    it('saves a lake', () => {
         return request.post('/lakes')
             // .set('Authorization', user1.token)
             .send(lake1)
@@ -54,7 +62,7 @@ describe('Lake API', () => {
             });
     });
 
-    it('saves a second song', () => {
+    it('saves a second lake', () => {
         return request.post('/lakes')
         // .set('Authorization', user1.token)
             .send(lake2)
@@ -100,7 +108,7 @@ describe('Lake API', () => {
 
     });
 
-    it('deletes a song', () => {
+    it('deletes a lake', () => {
         return request.delete(`/lakes/${lake2._id}`)
             // .set('Authorization', user1.token)
             .then(() => {

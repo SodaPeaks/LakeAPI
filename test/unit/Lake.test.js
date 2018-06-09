@@ -16,7 +16,11 @@ describe('Lake unit test', () => {
             surfaceArea: '2,000 square mi',
             maxDepth: '11 ft',
             avgDepth: '7 ft',
-            surfaceElevation: '2,000 mi'
+            surfaceElevation: '2,000 mi',
+            tsi: 'Oliotrophic',
+            avgTemp: '68',
+            notes: '',
+            bestSeason: ''
         };
 
         const lake = new Lake(input);
@@ -28,7 +32,7 @@ describe('Lake unit test', () => {
 
     it('if required field is empty throws error', () => {
         const lake = new Lake({});
-        const errors = getErrors(lake.validateSync(), 11);
+        const errors = getErrors(lake.validateSync(), 13);
         assert.equal(errors.name.kind, 'required');
         assert.equal(errors.state.kind, 'required');
     });

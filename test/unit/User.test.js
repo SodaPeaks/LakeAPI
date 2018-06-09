@@ -12,6 +12,7 @@ describe('User Model', () => {
     const password = 'foobar';
 
     let user = null;
+    
     beforeEach(() => {
         user = new User(data);
         user.generateHash(password);

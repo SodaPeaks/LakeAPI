@@ -18,7 +18,7 @@ then
 
 ## Built With
 
-  MongoDb, Express, NodeJS, Mongoose
+  Javascript, MongoDb, Express, NodeJS, Mongoose
 
 ## Testing
 
